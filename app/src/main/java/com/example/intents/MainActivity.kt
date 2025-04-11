@@ -65,7 +65,7 @@ fun getInfo() {
             ) {
 
                 Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    horizontalArrangement = Arrangement.End
                 ) {
                     Button(
                         onClick = { input = "" }
