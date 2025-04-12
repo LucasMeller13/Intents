@@ -1,5 +1,6 @@
 package com.example.intents
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -60,7 +61,6 @@ fun getInfo() {
                 label = { Text("Input Local") }
             )
             Box(
-//                modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
             ) {
 
@@ -78,16 +78,8 @@ fun getInfo() {
                             val query = Uri.encode(input)
                             val url = "https://www.google.com/maps/search/?api=1&query=$query"
                             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
-                            if (browserIntent.resolveActivity(context.packageManager) != null) {
-                                context.startActivity(browserIntent)
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "No browser available to open the map",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                            browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(browserIntent)
                         }
                     ) {
                         Text(text = "Enviar")
